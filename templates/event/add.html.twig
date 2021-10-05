@@ -1,0 +1,19 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Ajouter un événement{% endblock %}
+
+{% block body %}
+    <h1>Ajouter un événement</h1>
+
+    <hr>
+
+    {{ form(addEventForm) }}
+
+    {#
+    {{ form_start(addEventForm) }}
+        {{ form_row(addEventForm) }}
+
+        <input type="submit" value="Valider">
+    {{ form_end(addEventForm) }}
+    #}
+{% endblock %}
