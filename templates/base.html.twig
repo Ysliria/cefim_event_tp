@@ -18,8 +18,12 @@
     {% endblock %}
 </head>
 <body>
-{% include "includes/_navbar.html.twig" %}
+<header>
+    {% include "includes/_navbar.html.twig" %}
+</header>
 
-{% block body %}{% endblock %}
+<main class="container">
+    {% block body %}{% endblock %}
+</main>
 </body>
 </html>
