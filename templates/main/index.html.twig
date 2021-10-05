@@ -1,0 +1,34 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Event Site{% endblock %}
+
+{% block body %}
+    <h1>Bienvenue sur Event Site</h1>
+
+    <p>
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consectetur consequatur excepturi ipsam obcaecati
+        porro reiciendis, repellat sit. Ad alias dolore et ex facere illo nemo, odit perferendis, quasi quisquam vel.
+    </p>
+
+    <div class="row">
+        {% for event in events %}
+            <div class="col">
+                <div class="card mb-3">
+                    <h3 class="card-header">{{ event.name }}
+                        <span class="badge bg-primary rounded-pill">{{ event.placeNumber }}</span></h3>
+                    <img src="https://picsum.photos/id/237/200" alt="">
+
+                    <div class="card-body">
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi debitis hic laudantium neque
+                            nulla, odio quasi quia ullam vitae voluptates? Aperiam eius in nobis quaerat ratione
+                            repellat soluta ut voluptatum!</p>
+                        <a href="#" class="card-link">Another link</a>
+                    </div>
+                    <div class="card-footer text-muted">
+                        {{ event.startedAt | date('d/m/Y') }} - {{ event.endedAt | date('d/m/Y') }}
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}
