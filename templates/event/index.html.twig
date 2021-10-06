@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Les événements{% endblock %}
+
+{% block body %}
+    <h1>Les événements</h1>
+
+    <hr>
+
+    {% for message in app.flashes('success') %}
+        <div class="alert alert-success">
+            {{ message }}
+        </div>
+    {% endfor %}
+
+    <p class="text-end">
+        <a href="{{ path('event_add') }}"><i class="fas fa-plus-square fa-3x"></i></a>
+    </p>
+
+    <div class="row">
+        {% for event in events %}
+            {% include "includes/_card_event.html.twig" with {'event': event} %}
+        {% endfor %}
+    </div>
+
+{% endblock %}

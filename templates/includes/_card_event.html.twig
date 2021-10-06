@@ -1,0 +1,21 @@
+<div class="col-4">
+    <div class="card mb-3">
+        <h3 class="card-header">{{ event.name }}
+            <span class="badge bg-primary rounded-pill">{{ event.placeNumber }}</span></h3>
+
+        {% if event.picture %}
+            <img src="{{ event.picture }}" alt="image {{ event.name }}">
+        {% else %}
+            <img src="https://picsum.photos/id/870/200/300?grayscale&blur=2" alt="image alternative">
+        {% endif %}
+
+        <div class="card-body">
+            <p>{{ event.description }}</p>
+            <a href="{{ path('event_show', {'event': event.id}) }}" class="card-link">Détails</a>
+        </div>
+
+        <div class="card-footer text-muted">
+            {{ event.startedAt | date('d/m/Y') }} - {{ event.endedAt | date('d/m/Y') }}
+        </div>
+    </div>
+</div>
