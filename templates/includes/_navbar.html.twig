@@ -36,10 +36,13 @@
                 </li>
                 #}
             </ul>
-            <form class="d-flex">
-                <input class="form-control me-sm-2" type="text" placeholder="Search">
-                <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
-            </form>
+            <div class="d-flex">
+                {% if app.user %}
+                    <a href="{{ path('app_logout') }}" class="btn btn-warning">Se déconnecter</a>
+                {% else %}
+                    <a href="{{ path('app_login') }}" class="btn btn-info">Se connecter</a>
+                {% endif %}
+            </div>
         </div>
     </div>
 </nav>
