@@ -19,7 +19,6 @@ class EventType extends AbstractType
             ->add('placeNumber')
             ->add('description')
             ->add('picture')
-            ->add('save', SubmitType::class)
         ;
     }
 

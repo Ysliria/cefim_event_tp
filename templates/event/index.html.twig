@@ -7,10 +7,15 @@
 
     <hr>
 
-    <div class="row">
-        <div class="col"></div>
-        <div class="col"></div>
-    </div>
+    {% for message in app.flashes('success') %}
+        <div class="alert alert-success">
+            {{ message }}
+        </div>
+    {% endfor %}
+
+    <p class="text-end">
+        <a href="{{ path('event_add') }}"><i class="fas fa-plus-square fa-3x"></i></a>
+    </p>
 
     <div class="row">
         {% for event in events %}

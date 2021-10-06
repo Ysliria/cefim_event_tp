@@ -11,10 +11,28 @@
         <div class="col-3">
             <img src="{{ event.picture }}" alt="Image {{ event.name }}">
         </div>
+
         <div class="col-9">
             <p>
                 {{ event.description }}
             </p>
+        </div>
+    </div>
+
+    <hr>
+
+    <div class="row">
+        <div class="col">
+            <h4>Dates de l'événement</h4>
+            <p>Du {{ event.startedAt | date('d/m/Y') }} au {{ event.endedAt | date('d/m/Y') }}</p>
+        </div>
+        <div class="col">
+            <h4>Nombre de places</h4>
+            <p>{{ event.placeNumber }}</p>
+        </div>
+        <div class="col text-end">
+            <a href="{{ path('event_update', {'event': event.id}) }}"><i class="fas fa-edit fa-2x"></i></a>
+            <a href="{{ path('event_delete', {'event': event.id}) }}"><i class="fas fa-trash-alt fa-2x"></i></a>
         </div>
     </div>
 {% endblock %}

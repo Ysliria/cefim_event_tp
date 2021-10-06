@@ -7,13 +7,15 @@
 
     <hr>
 
-    {{ form(addEventForm) }}
-
-    {#
     {{ form_start(addEventForm) }}
         {{ form_row(addEventForm) }}
 
-        <input type="submit" value="Valider">
+        <div class="row">
+            <div class="col text-start">
+                <a href="{{ path('event') }}" class="btn btn-primary">Retour à la liste</a></div>
+
+            <div class="col text-end">
+                <input type="submit" value="Valider" class="btn btn-success"></div>
+        </div>
     {{ form_end(addEventForm) }}
-    #}
 {% endblock %}
