@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Modifier {{ event.name }}{% endblock %}
+
+{% block body %}
+    <h1>Modifier {{ event.name }}</h1>
+
+    <hr>
+
+    {{ form_start(updateEventForm) }}
+    {{ form_row(updateEventForm) }}
+
+    <div class="row">
+        <div class="col text-start">
+            <a href="{{ path('event_show', {'event': event.id}) }}" class="btn btn-primary">Retour à {{ event.name }}</a></div>
+
+        <div class="col text-end">
+            <input type="submit" value="Valider" class="btn btn-success"></div>
+    </div>
+    {{ form_end(updateEventForm) }}
+{% endblock %}

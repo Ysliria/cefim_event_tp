@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Event Site{% endblock %}
+
+{% block body %}
+    <h1>Bienvenue sur Event Site</h1>
+
+    <p>
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consectetur consequatur excepturi ipsam obcaecati
+        porro reiciendis, repellat sit. Ad alias dolore et ex facere illo nemo, odit perferendis, quasi quisquam vel.
+    </p>
+
+    <div class="row">
+        {% for event in events %}
+            {% include "includes/_card_event.html.twig" with {'event': event} %}
+        {% endfor %}
+    </div>
+{% endblock %}

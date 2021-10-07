@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello ProfileController!{% endblock %}
+
+{% block body %}
+    <h1>{{ app.user.firstname }} {{ app.user.lastname }}</h1>
+
+    <hr>
+
+    <section class="row">
+        <h2>Mon profil</h2>
+
+        <ul>
+            <li><strong>Prénom</strong> : {{ app.user.firstname }}</li>
+            <li><strong>Nom</strong>: {{ app.user.lastname }}</li>
+            <li><strong>Mail</strong> : {{ app.user.email }}</li>
+        </ul>
+    </section>
+
+    <hr>
+
+    <section class="row">
+        <h2>Mes événements</h2>
+
+        {% for participation in participation_list %}
+            {% include "includes/_card_event.html.twig" with {'event': participation.event, 'profil': true} %}
+        {% endfor %}
+    </section>
+{% endblock %}
