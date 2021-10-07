@@ -11,7 +11,13 @@
 
         <div class="card-body">
             <p>{{ event.description }}</p>
-            <a href="{{ path('event_show', {'event': event.id}) }}" class="card-link">Détails</a>
+            <a href="{{ path('event_show', {'event': event.id}) }}" class="btn btn-info">Détails</a>
+
+            {% if profil is not defined %}
+                <a href="{{ path('event_participate', {'event': event.id}) }}" class="btn btn-primary">Participer</a>
+            {% else %}
+                <a href="" class="btn btn-primary">Evaluer</a>
+            {% endif %}
         </div>
 
         <div class="card-footer text-muted">
