@@ -16,10 +16,12 @@
                 <li class="nav-item">
                     <a class="nav-link" href="{{ path('event') }}">Evénements</a>
                 </li>
+                {% if app.user %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ path('profile') }}">Mon profil</a>
+                    </li>
+                {% endif %}
                 {#
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Pricing</a>
-                </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#">About</a>
                 </li>
@@ -41,6 +43,7 @@
                     <a href="{{ path('app_logout') }}" class="btn btn-warning">Se déconnecter</a>
                 {% else %}
                     <a href="{{ path('app_login') }}" class="btn btn-info">Se connecter</a>
+                    <a href="{{ path('register') }}" class="btn btn-success">S'enregistrer</a>
                 {% endif %}
             </div>
         </div>

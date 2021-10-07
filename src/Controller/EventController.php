@@ -6,6 +6,7 @@ use App\Entity\Event;
 use App\Form\EventType;
 use App\Repository\EventRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -27,6 +28,7 @@ class EventController extends AbstractController
 
     /**
      * @Route("/events/add", name="event_add")
+     * @IsGranted("ROLE_CONTRIBUTOR")
      */
     public function add(Request $request, EntityManagerInterface $entityManager)
     {
@@ -53,6 +55,7 @@ class EventController extends AbstractController
 
     /**
      * @Route("/events/{event}/update", name="event_update")
+     * @IsGranted("ROLE_CONTRIBUTOR")
      */
     public function update(Event $event, Request $request, EntityManagerInterface $entityManager)
     {
@@ -72,6 +75,7 @@ class EventController extends AbstractController
 
     /**
      * @Route("/events/{event}/delete", name="event_delete")
+     * @IsGranted("ROLE_ADMIN")
      */
     public function delete(Event $event, EntityManagerInterface $entityManager)
     {
