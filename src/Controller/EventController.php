@@ -3,7 +3,9 @@
 namespace App\Controller;
 
 use App\Entity\Event;
+use App\Entity\Participation;
 use App\Form\EventType;
+use App\Form\ParticipationType;
 use App\Repository\EventRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
@@ -96,6 +98,32 @@ class EventController extends AbstractController
     {
         return $this->render('event/show.html.twig', [
             'event' => $event
+        ]);
+    }
+
+    /**
+     * @Route("/events/{event}/participate", name="event_participate")
+     * @IsGranted("ROLE_USER")
+     */
+    public function participate(Event $event, Request $request, EntityManagerInterface $entityManager)
+    {
+        $participation = new Participation();
+        $participation->setEvent($event)->setUser($this->getUser());
+
+        $eventParticipationForm = $this->createForm(ParticipationType::class, $participation);
+
+        $eventParticipationForm->handleRequest($request);
+
+        if ($eventParticipationForm->isSubmitted() && $eventParticipationForm->isValid()) {
+            $participation = $eventParticipationForm->getData();
+
+            $entityManager->persist($participation);
+            $entityManager->flush();
+        }
+
+        return $this->render('event/participate.html.twig', [
+            'event' => $event,
+            'eventParticipationForm' => $eventParticipationForm->createView()
         ]);
     }
 }
