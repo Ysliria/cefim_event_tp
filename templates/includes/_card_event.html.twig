@@ -16,7 +16,7 @@
             {% if profil is not defined %}
                 <a href="{{ path('event_participate', {'event': event.id}) }}" class="btn btn-primary">Participer</a>
             {% else %}
-                <a href="" class="btn btn-primary">Evaluer</a>
+                <a href="{{ path('event_evaluate', {'event': event.id}) }}" class="btn btn-primary">Evaluer</a>
             {% endif %}
         </div>
 

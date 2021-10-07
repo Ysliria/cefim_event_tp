@@ -37,9 +37,26 @@
                 <a href="{{ path('event_update', {'event': event.id}) }}"><i class="fas fa-edit fa-2x"></i></a>
             {% endif %}
 
-            {% if is_granted('ROLE_ADMIN')%}
+            {% if is_granted('ROLE_ADMIN') %}
                 <a href="{{ path('event_delete', {'event': event.id}) }}"><i class="fas fa-trash-alt fa-2x"></i></a>
             {% endif %}
         </div>
     </div>
+
+    <hr>
+
+    <section class="row">
+        <h2>Evaluations</h2>
+
+        {% for evaluation in evaluations %}
+            <figure>
+                <blockquote class="blockquote">
+                    <p>{{ evaluation.comment }}</p>
+                </blockquote>
+                <figcaption class="blockquote-footer">
+                    {{ evaluation.user.firstname}} {{ evaluation.user.lastname }} : <cite title="Source Title">{{ evaluation.rate }}</cite>
+                </figcaption>
+            </figure>
+        {% endfor %}
+    </section>
 {% endblock %}

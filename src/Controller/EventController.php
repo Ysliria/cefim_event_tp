@@ -4,9 +4,11 @@ namespace App\Controller;
 
 use App\Entity\Event;
 use App\Entity\Participation;
+use App\Form\EventEvaluationType;
 use App\Form\EventType;
 use App\Form\ParticipationType;
 use App\Repository\EventRepository;
+use App\Repository\ParticipationRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -94,10 +96,13 @@ class EventController extends AbstractController
     /**
      * @Route("/events/{event}", name="event_show")
      */
-    public function show(Event $event)
+    public function show(Event $event, ParticipationRepository $participationRepository)
     {
+        $evaluations = $participationRepository->findByEvent($event);
+
         return $this->render('event/show.html.twig', [
-            'event' => $event
+            'event' => $event,
+            'evaluations' => $evaluations
         ]);
     }
 
@@ -124,6 +129,32 @@ class EventController extends AbstractController
         return $this->render('event/participate.html.twig', [
             'event' => $event,
             'eventParticipationForm' => $eventParticipationForm->createView()
+        ]);
+    }
+
+    /**
+     * @Route("/events/{event}/evaluate", name="event_evaluate")
+     * @IsGranted("ROLE_USER")
+     */
+    public function evaluate(Event $event, EntityManagerInterface $entityManager, Request $request, ParticipationRepository $participationRepository)
+    {
+        $participation = $participationRepository->findOneBy([
+            'user' => $this->getUser(),
+            'event' => $event]);
+
+        $eventEvaluateForm = $this->createForm(EventEvaluationType::class, $participation);
+
+        $eventEvaluateForm->handleRequest($request);
+
+        if($eventEvaluateForm->isSubmitted() && $eventEvaluateForm->isValid()) {
+            $entityManager->flush();
+
+            return $this->redirectToRoute('event_show', ['event' => $event->getId()]);
+        }
+
+
+        return $this->render('event/evaluate.html.twig', [
+            'eventEvaluateForm' => $eventEvaluateForm->createView()
         ]);
     }
 }
