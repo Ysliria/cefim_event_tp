@@ -26,13 +26,20 @@
             <h4>Dates de l'événement</h4>
             <p>Du {{ event.startedAt | date('d/m/Y') }} au {{ event.endedAt | date('d/m/Y') }}</p>
         </div>
+
         <div class="col">
             <h4>Nombre de places</h4>
             <p>{{ event.placeNumber }}</p>
         </div>
+
         <div class="col text-end">
-            <a href="{{ path('event_update', {'event': event.id}) }}"><i class="fas fa-edit fa-2x"></i></a>
-            <a href="{{ path('event_delete', {'event': event.id}) }}"><i class="fas fa-trash-alt fa-2x"></i></a>
+            {% if is_granted('ROLE_CONTRIBUTOR') %}
+                <a href="{{ path('event_update', {'event': event.id}) }}"><i class="fas fa-edit fa-2x"></i></a>
+            {% endif %}
+
+            {% if is_granted('ROLE_ADMIN')%}
+                <a href="{{ path('event_delete', {'event': event.id}) }}"><i class="fas fa-trash-alt fa-2x"></i></a>
+            {% endif %}
         </div>
     </div>
 {% endblock %}
